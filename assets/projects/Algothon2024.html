@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Details</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="./assets/img/B1-Logo.png" type="image/x-icon">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Markdown Rendering Library -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    /* Styling for Markdown-rendered content */
+    .markdown-content {
+      padding: 20px;
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main>
+    <article class="project-details" data-page="project-details">
+      <header>
+        <h2 class="h2 article-title">Project Summary</h2>
+      </header>
+
+      <section class="markdown-editor">
+        <textarea id="markdown-input" placeholder="Write your project details in Markdown..." style="width: 100%; height: 200px;"></textarea>
+        <button onclick="renderMarkdown()" style="margin: 10px 0; padding: 10px 20px; cursor: pointer;">Preview</button>
+      </section>
+
+      <section class="markdown-content" id="markdown-output">
+        <!-- Rendered Markdown content will appear here -->
+      </section>
+    </article>
+  </main>
+
+  <script>
+    function renderMarkdown() {
+      const markdownInput = document.getElementById('markdown-input').value;
+      const markdownOutput = marked(markdownInput);
+      document.getElementById('markdown-output').innerHTML = markdownOutput;
+    }
+  </script>
+
+</body>
+
+</html>
