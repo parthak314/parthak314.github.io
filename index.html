@@ -261,10 +261,10 @@
                 </div>
 
                 <div class="service-content-box">
-                  <h4 class="h4 service-item-title">Web development</h4>
+                  <h4 class="h4 service-item-title">Cyber Security</h4>
 
                   <p class="service-item-text">
-                    High-quality development of sites at the professional level.
+                    Implementing an SIEM system using the ELK stack (Elastic Search, Logstash, Kibana)
                   </p>
                 </div>
 
@@ -556,8 +556,10 @@
               <span>October 2022 — July 2023</span>
 
               <p class="timeline-text">
-                COMPOS offers a rigorous and intellectually stimulating academic experience. The program's emphasis on problem-solving, critical thinking, and advanced topics provides a strong foundation for future pursuits. Its interdisciplinary approach, which merges mathematics and physics, is particularly valuable. This approach allows students to appreciate the interconnectedness of these two fundamental sciences and apply their knowledge to solve complex problems.</p>
-
+                - COMPOS offers a rigorous and intellectually stimulating academic experience. </br>
+                - The program's emphasis on problem-solving, critical thinking, and advanced topics provides a strong foundation for future pursuits. Its interdisciplinary approach, which merges mathematics and physics, is particularly valuable. </br>
+                - This approach allows students to appreciate the interconnectedness of these two fundamental sciences and apply their knowledge to solve complex problems.
+              </p>
             </li>
 
             <li class="timeline-item">
@@ -579,7 +581,11 @@
               <span>September 2016 — August 2021</span>
 
               <p class="timeline-text">
-                Participated in a variety of academic and athletic pursuits, showcasing a well-rounded skill set. Excelled in sports like Cricket, Chess, Badminton, and Swimming, and represented the school in prestigious competitions. Achieved academic success with Gold UKMT Junior & Intermediate certifications and a second-place finish in the regional Team Mathematical Challenge. Engaged in diverse extracurricular activities, including Debating, Spelling Bee, Programming, Electronics, Drone and Robot Design, Mathematical Challenges, and App Development. Additionally, representing my cohort for 4 years as a wellbeing representative.
+                - Participated in a variety of academic and athletic pursuits, showcasing a well-rounded skill set. </br>
+                - Excelled in sports like Cricket, Chess, Badminton, and Swimming, and represented the school in prestigious competitions. </br>
+                - Achieved academic success with Gold UKMT Junior & Intermediate certifications and a second-place finish in the regional Team Mathematical Challenge. </br>
+                - Engaged in diverse extracurricular activities, including Debating, Spelling Bee, Programming, Electronics, Drone and Robot Design, Mathematical Challenges, and App Development. </br>
+                - Additionally, representing my cohort for 4 years as a wellbeing representative.</br>
               </p>
 
             </li>
@@ -607,12 +613,9 @@
               <span>March 2022 — August 2024</span>
 
               <p class="timeline-text">
-                Envisioning the future of technology involves an in-depth exploration of cutting-edge trends, anticipated breakthroughs, and the transformative impact of technological advancements on pressing global challenges. This forward-looking analysis delves into the innovations emerging from leading institutions such as Google, MIT, IBM, Apple, and prominent universities, with the goal of fostering a deeper understanding of how these advancements are shaping the world.
-              </p>
-              
-              <p class="timeline-text">
-                Additionally, this initiative serves as an educational platform, inspiring and motivating individuals to proactively engage with the latest technological developments. Through expert guidance and tuition services, learners are empowered to harness these innovations and contribute to the rapidly evolving tech landscape.
-              </p>
+                - Envisioning the future of technology involves an in-depth exploration of cutting-edge trends, anticipated breakthroughs, and the transformative impact of technological advancements on pressing global challenges. </br>
+                - This forward-looking analysis delves into the innovations emerging from leading institutions such as Google, MIT, IBM, Apple, and universities, with the goal of fostering a deeper understanding of how these advancements are shaping the world.</br>
+                - Additionally, this initiative serves as an educational platform, inspiring and motivating individuals to proactively engage with the latest technological developments. Through expert guidance and tuition services, learners are empowered to harness these innovations and contribute to the rapidly evolving tech landscape.</p>
 
             </li>
 
@@ -623,7 +626,11 @@
               <span>July 2023 - August 2023</span>
 
               <p class="timeline-text">
-                ---
+                - Researching and implementing various tranducers for equipment testing and presenting the transducers and sensors to a panel, as well as providing personal recommedations based on project requirements</br>
+                - Using various MCUs with Serial Communication Protocols</br>
+                - Purchasing transducers and assessing their mechanical properties and in CAD models (SolidWorks)</br>
+                - Developing a software to use the transducers linking to the MCU</br>
+                - The Microcontrolller board was programmed in Embedded C but the HAL [Hardware Abstraction Layer] libraries were implemented allowing for further control.</br>
               </p>
 
             </li>
@@ -636,9 +643,7 @@
               <span>2010 — 2013</span>
 
               <p class="timeline-text">
-                Nemo enims ipsam voluptatem, blanditiis praesentium voluptum delenit atque corrupti, quos dolores et
-                quas molestias
-                exceptur.
+                Working on web development and the Social Media interface.
               </p>
 
             </li>
@@ -1042,7 +1047,8 @@
 
           <h3 class="h3 form-title">Contact Form</h3>
 
-          <form action="#" class="form" data-form>
+          <form action="https://api.web3forms.com/submit" method="POST" class="form" data-form>
+            <input type="hidden" name="access_key" value="8a1ddc09-46a8-49bd-a0d0-340ffb28d11b">
 
             <div class="input-wrapper">
               <input type="text" name="fullname" class="form-input" placeholder="Full name" required data-form-input>
@@ -1052,7 +1058,9 @@
 
             <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
 
-            <button class="form-btn" type="submit" disabled data-form-btn>
+              <!-- Honeypot Spam Protection -->
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+            <button class="form-btn" type="submit" data-form-btn>
               <ion-icon name="paper-plane"></ion-icon>
               <span>Send Message</span>
             </button>
