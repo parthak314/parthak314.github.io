@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parthak314 Website</title>
+
+  <!--
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./assets/img/B1-Logo.png" type="image/x-icon">
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <script type="module" src="https://md-block.verou.me/md-block.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/themes/prism.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.28.0/prism.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/MathJax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+    }
+    h1, h2, h3 {
+        color: #eff5bf;
+        margin-top: 30px;
+    }
+    h1 {
+        text-align: center;
+        font-size: 2.5rem;
+    }
+    pre {
+        background-color: #e9ecef;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+    }
+    code {
+        font-family: "Courier New", Courier, monospace;
+    }
+    .highlight {
+        background-color: #f8f9fa;
+        border-left: 5px solid #343a40;
+        padding: 10px;
+    }
+    ul {
+        margin: 10px 0;
+        padding-left: 20px;
+    }
+</style>
+</head>
+
+<body>
+
+  <!--
+    - #MAIN
+  -->
+
+  <main>
+
+    <!--
+      - #SIDEBAR
+    -->
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <a href="/index.html">
+          <figure class="avatar-box">
+            <img src="./assets/img/GO1-Logo.png" style="border-radius: 30px; padding: 20px;">
+          </figure>
+        </a>
+
+        <div class="info-content">
+          <h1 class="name">Partha Khanna</h1>
+
+          <p class="title">Student</p>
+          <p style="padding: 2px;"> </p>
+          <p class="title">Imperial College London</p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+
+              <a href="mailto:parthakhanna05@gmail.com" class="contact-link">parthakhanna05@gmail.com</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Phone</p>
+
+              <a href="tel:+447585950944" class="contact-link">+44 75859 50944</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+
+              <address>London, UK</address>
+            </div>
+
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+
+          <li class="social-item">
+            <a href="https://github.com/parthak314" class="social-link">
+              <ion-icon name="logo-github"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://www.kaggle.com/parthakhanna" class="social-link">
+              k
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://www.linkedin.com/in/partha-khanna/" class="social-link">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://www.instagram.com/parthk314/" class="social-link">
+              <ion-icon name="logo-instagram"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
+    
+
+    <!--
+      - #main-content
+    -->
+
+    <div class="main-content">
+
+      <!--
+        - #ABOUT
+      -->
+
+      <article class="about  active" data-page="about">
+        <header>
+          <div style="width: 100%; height: 200px; overflow: hidden;">
+            <img src="assets/img/Algothon2024.png" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+          </div>
+          <table class="info-content" style="padding-top: 10px; padding-bottom: 10px;">
+            <tr>
+              <td>
+                <h2 class="h2 article-title" style="padding-top:20px; display: flex; float: left;;">Algothon 2024</h2>
+              </td>
+              <a href="https://github.com/parthak314/Algothon2024">
+                <div style="float: right; position: absolute; right: 0; padding-right: 30px; padding-top: 50px;">
+                  <div class="title">
+                    <div class="form-btn" >
+                      <ion-icon name="logo-github" size="large" style="display:flex; margin:auto; padding-bottom: 3px;"></ion-icon>
+                      <b>View the repository on Github</b> 
+                    </div>
+                  </div>
+              </div>
+              </a>
+              
+            </tr>
+          </table>
+          
+          <div class="info-content">
+            <!-- collaboration? -->
+            <p class="title" style="color:bisque"><b><i>In collaboration with Joel Ng, Kevin Aubeeluck and Clarke Chong</i></b></p>
+          </div>
+        </header>
+        <div style="color: white; padding-top: 10px;">
+          <!-- Enter contents here-->
+        </div>
+      </article>
+    </div>
+  </main>
+
+
+
+
+
+
+  <!--
+    - custom js link
+  -->
+  <script src="./assets/js/script.js"></script>
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
