@@ -333,6 +333,24 @@ main {
   border-radius: 8px;
 }
 
+.info-content-a .name {
+  color: var(--white-2);
+  font-size: var(--fs-3);
+  font-weight: var(--fw-500);
+  letter-spacing: -0.25px;
+  margin-bottom: 10px;
+}
+
+.info-content-a .title-a {
+  color: var(--white-1);
+  background: var(--onyx);
+  font-size: var(--fs-8);
+  font-weight: var(--fw-300);
+  width: max-content;
+  padding: 3px 12px;
+  border-radius: 8px;
+}
+
 .info_more-btn {
   position: absolute;
   top: -15px;
@@ -1348,6 +1366,10 @@ textarea.form-input::-webkit-resizer { display: none; }
 
   .info-content .title { padding: 5px 18px; }
 
+  .info-content-a .name { margin-bottom: 15px; }
+
+  .info-content-a .title { padding: 5px 18px; }
+
   .info_more-btn {
     top: -30px;
     right: -30px;
@@ -1860,6 +1882,18 @@ textarea.form-input::-webkit-resizer { display: none; }
   }
 
   .info-content .title { margin: auto; }
+
+  .info-content-a .name {
+    white-space: nowrap;
+    text-align: center;
+  }
+
+  .info-content-a .title-a { margin: auto; }
+
+  .info-content-a:hover .title-a:hover{
+    color: rgb(255, 94, 255);
+    transform: perspective(1000px) scale(1.01);
+  }
 
   .info_more-btn { display: none; }
 
