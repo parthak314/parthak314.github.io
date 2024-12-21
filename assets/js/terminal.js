@@ -23,14 +23,17 @@ const blogs = {
 };
 
 const projects = {
-  'Finance': {
-    'algothon-2024': { content: 'Slack messages provide credentials every 19 minutes to unlock stock data on Google Drive, used by an algorithm for trading decisions, with results submitted via a Google Form.', url: 'https://parthak314.gitbook.io/docs/~/changes/1zPhlIMzZERAXpdxecSv/projects/algothon-2024' }
+  'finance': {
+    'algothon-2024': { content: 'This is the content of project 1.', url: 'https://example.com/project1' },
+    'project2': { content: 'This is the content of project 2.', url: 'https://example.com/project2' }
   },
-  'Hardware': {
-    'riscv-processor': { content: 'Wait, this project is yet to be released!', url: '' }
+  'hardware': {
+    'riscv-processor': { content: 'This is the content of project 3.', url: 'https://example.com/project3' },
+    'project4': { content: 'This is the content of project 4.', url: 'https://example.com/project4' }
   },
-  'CyberSecurity': {
-    'siem-elk-stack': { content: 'Wait, this project is yet to be released!', url: '' }
+  'cybersecurity': {
+    'project5': { content: 'This is the content of project 5.', url: 'https://example.com/project5' },
+    'project6': { content: 'This is the content of project 6.', url: 'https://example.com/project6' }
   }
 };
 
@@ -87,6 +90,9 @@ inputElement.addEventListener('keydown', function(event) {
       historyIndex = (historyIndex + 1) % history.length;
       inputElement.value = history[history.length - 1 - historyIndex];
     }
+  } else if (event.key === 'Tab') {
+    event.preventDefault();
+    handleAutoComplete();
   } else if (event.key === 'q' && helpOverlay.style.display === 'block') {
     helpOverlay.style.display = 'none';
     inputElement.focus();
@@ -142,17 +148,30 @@ function handleCommand(command) {
       break;
     case 'cd':
       const directory = args[0];
+      console.log(`Attempting to change directory to: ${directory}`);
       if (directory === '..') {
         if (currentDirectory !== '/') {
           currentDirectory = currentDirectory.substring(0, currentDirectory.lastIndexOf('/')) || '/';
+          console.log(`Changed directory to: ${currentDirectory}`);
           outputElement.innerHTML += getPrompt() + command + '<br>' + 'Changed directory to ' + currentDirectory + '<br>';
         } else {
+          console.log('Already at root directory.');
           outputElement.innerHTML += getPrompt() + command + '<br>' + 'Already at root directory.<br>';
         }
-      } else if (directory === 'blogs' || directory === 'projects' || projects[directory]) {
-        currentDirectory = '/' + directory;
+      } else if (directory === 'blogs' || directory === 'projects') {
+        currentDirectory = currentDirectory === '/' ? `/${directory}` : `${currentDirectory}/${directory}`;
+        console.log(`Changed directory to: ${currentDirectory}`);
+        outputElement.innerHTML += getPrompt() + command + '<br>' + 'Changed directory to ' + currentDirectory + '<br>';
+      } else if (currentDirectory === '/projects' && projects[directory]) {
+        currentDirectory = `${currentDirectory}/${directory}`;
+        console.log(`Changed directory to: ${currentDirectory}`);
+        outputElement.innerHTML += getPrompt() + command + '<br>' + 'Changed directory to ' + currentDirectory + '<br>';
+      } else if (currentDirectory.startsWith('/projects') && projects[currentDirectory.split('/')[2]] && projects[currentDirectory.split('/')[2]][directory]) {
+        currentDirectory = `${currentDirectory}/${directory}`;
+        console.log(`Changed directory to: ${currentDirectory}`);
         outputElement.innerHTML += getPrompt() + command + '<br>' + 'Changed directory to ' + currentDirectory + '<br>';
       } else {
+        console.log('Directory not found.');
         outputElement.innerHTML += getPrompt() + command + '<br>' + 'Directory not found.<br>';
       }
       break;
@@ -165,6 +184,7 @@ function handleCommand(command) {
           window.open(projectUrl, '_blank');
           outputElement.innerHTML += getPrompt() + command + '<br>' + 'Opened ' + projectUrl + ' in a new tab.<br>';
         } else {
+          console.log('Item not found or cannot be opened.');
           outputElement.innerHTML += getPrompt() + command + '<br>' + 'Item not found or cannot be opened.<br>';
         }
       } else if (currentDirectory === '/blogs' && blogs[itemToOpen]) {
@@ -172,6 +192,7 @@ function handleCommand(command) {
         window.open(blogUrl, '_blank');
         outputElement.innerHTML += getPrompt() + command + '<br>' + 'Opened ' + blogUrl + ' in a new tab.<br>';
       } else {
+        console.log('Item not found or cannot be opened.');
         outputElement.innerHTML += getPrompt() + command + '<br>' + 'Item not found or cannot be opened.<br>';
       }
       break;
@@ -179,8 +200,10 @@ function handleCommand(command) {
       const newName = args[0];
       if (newName) {
         username = newName;
+        console.log(`Username changed to: ${username}`);
         outputElement.innerHTML += getPrompt() + command + '<br>' + 'Username changed to ' + username + '<br>';
       } else {
+        console.log('Please provide a new username.');
         outputElement.innerHTML += getPrompt() + command + '<br>' + 'Please provide a new username.<br>';
       }
       break;
@@ -196,10 +219,51 @@ function handleCommand(command) {
       outputElement.innerHTML += getPrompt() + command + '<br>' + history.join('<br>') + '<br>';
       break;
     default:
+      console.log('Command not found.');
       outputElement.innerHTML += getPrompt() + command + '<br>' + 'Command not found.<br>';
   }
   outputElement.scrollTop = outputElement.scrollHeight;
   inputElement.focus(); // Ensure the input field is always focused
+}
+
+function handleAutoComplete() {
+  const input = inputElement.value.trim();
+  const [cmd, ...args] = input.split(' ');
+
+  let suggestions = [];
+
+  if (args.length === 0) {
+    // Suggest commands
+    suggestions = Object.keys(commands).filter(command => command.startsWith(cmd));
+  } else if (cmd === 'cd') {
+    // Suggest directories
+    if (currentDirectory === '/') {
+      suggestions = ['blogs', 'projects'].filter(dir => dir.startsWith(args[0]));
+    } else if (currentDirectory === '/projects') {
+      suggestions = Object.keys(projects).filter(dir => dir.startsWith(args[0]));
+    } else if (currentDirectory.startsWith('/projects')) {
+      const subDir = currentDirectory.split('/')[2];
+      if (projects[subDir]) {
+        suggestions = Object.keys(projects[subDir]).filter(dir => dir.startsWith(args[0]));
+      }
+    }
+  } else if (cmd === 'cat' || cmd === 'open') {
+    // Suggest blogs or projects
+    if (currentDirectory === '/blogs') {
+      suggestions = Object.keys(blogs).filter(item => item.startsWith(args[0]));
+    } else if (currentDirectory.startsWith('/projects')) {
+      const subDir = currentDirectory.split('/')[2];
+      if (projects[subDir]) {
+        suggestions = Object.keys(projects[subDir]).filter(item => item.startsWith(args[0]));
+      }
+    }
+  }
+
+  if (suggestions.length === 1) {
+    inputElement.value = `${cmd} ${suggestions[0]}`;
+  } else if (suggestions.length > 1) {
+    outputElement.innerHTML += getPrompt() + input + '<br>' + suggestions.join('<br>') + '<br>';
+  }
 }
 
 function showHelp() {
