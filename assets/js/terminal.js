@@ -24,16 +24,14 @@ const blogs = {
 
 const projects = {
   'finance': {
-    'algothon-2024': { content: 'This is the content of project 1.', url: 'https://example.com/project1' },
-    'project2': { content: 'This is the content of project 2.', url: 'https://example.com/project2' }
+    'algothon-2024': { content: 'Every 19 minutes, Slack provides credentials for stock data used by a trading algorithm, with results submitted via Google Form.', url: 'https://parthak314.gitbook.io/docs/projects/algothon-2024' }
   },
   'hardware': {
     'riscv-processor': { content: 'This is the content of project 3.', url: 'https://example.com/project3' },
-    'project4': { content: 'This is the content of project 4.', url: 'https://example.com/project4' }
+    'drone': { content: 'Design a high-speed, agile racing drone with advanced controls and FPV for competitive drone racing.', url: '' }
   },
   'cybersecurity': {
-    'project5': { content: 'This is the content of project 5.', url: 'https://example.com/project5' },
-    'project6': { content: 'This is the content of project 6.', url: 'https://example.com/project6' }
+    'tbc': { content: 'Wait, this project is yet to be released!', url: '' }
   }
 };
 
@@ -259,9 +257,7 @@ function handleAutoComplete() {
     }
   }
 
-  if (suggestions.length === 1) {
-    inputElement.value = `${cmd} ${suggestions[0]}`;
-  } else if (suggestions.length > 1) {
+  if (suggestions.length > 1) {
     outputElement.innerHTML += getPrompt() + input + '<br>' + suggestions.join('<br>') + '<br>';
   }
 }
