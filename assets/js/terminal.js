@@ -50,6 +50,27 @@ const commands = {
   'history': 'Show command history'
 };
 
+const fortunes = [
+  "You will have a great day!",
+  "Good news will come to you by mail. Unless you're a millennial, then it will come by text.",
+  "You will meet someone special today. They will be very good at programming.",
+  "A fresh start will put you on your way. Remember this when you find yourself at a dead end.",
+  "Another internship has just opened up for you - Apply now for peace of mind. Or don't, I'm just a computer program.",
+  "Why did the scarecrow win an award? Because he was outstanding in his field! (You can be too!)",
+  "Why don't skeletons fight each other? Doesn't matter, focus on your studies. You have an exam coming up.",
+  "I told my computer I needed a break, and now it won't stop sending me Kit-Kats.",
+  "Parallel lines have so much in common. It’s a shame they’ll never meet.",
+  "I would tell you a UDP joke, but you might not get it. Also, I don't have time to listen to your response.",
+  "Why do programmers prefer dark mode? Because light attracts bugs!",
+  "You will ace your next exam! If you study.",
+  "Your group project will be better than the last one. I can't promise success but you'll probably try harder knowing how the last one went.",
+  "You will find the perfect study spot today. Your home.",
+  "Your professor will not give you an extension on your assignment. You should have planned this better from the start.",
+  "You will discover a new favorite coffee shop. Your kitchen.",
+  "Your next lecture will be surprisingly interesting. Just like every other lecture, but you will never know since you keep missing them.",
+  "You will make a new friend in your next class. ChatGPT. Or some other AI."
+];
+
 const history = [];
 let historyIndex = -1;
 
