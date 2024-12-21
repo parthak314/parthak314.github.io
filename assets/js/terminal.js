@@ -1,0 +1,213 @@
+const outputElement = document.getElementById('output');
+const inputElement = document.getElementById('input');
+const helpOverlay = document.createElement('div');
+helpOverlay.id = 'help-overlay';
+helpOverlay.style.display = 'none';
+helpOverlay.style.position = 'fixed';
+helpOverlay.style.top = '0';
+helpOverlay.style.left = '0';
+helpOverlay.style.width = '100%';
+helpOverlay.style.height = '100%';
+helpOverlay.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+helpOverlay.style.color = '#ffffff';
+helpOverlay.style.fontFamily = 'Ubuntu Mono, monospace';
+helpOverlay.style.padding = '20px';
+helpOverlay.style.overflowY = 'auto';
+helpOverlay.style.zIndex = '1000';
+document.body.appendChild(helpOverlay);
+
+const blogs = {
+  'port-scanning': { content: 'Port scanning is a key technique in cybersecurity, revealing open doors to network services and potential vulnerabilities. By uncovering which ports are accessible, you can gain insights into network.', url: 'https://parthak314.gitbook.io/docs/~/changes/1zPhlIMzZERAXpdxecSv/parthak314-bytedocs-314-bytes/introduction-to-port-scanning' },
+  'advent-of-cyber-2024': { content: 'Wait, this blog is yet to be released!', url: '' },
+  'books-2024': { content: 'Wait, this blog is yet to be released!', url: '' }
+};
+
+const projects = {
+  'Finance': {
+    'algothon-2024': { content: 'Slack messages provide credentials every 19 minutes to unlock stock data on Google Drive, used by an algorithm for trading decisions, with results submitted via a Google Form.', url: 'https://parthak314.gitbook.io/docs/~/changes/1zPhlIMzZERAXpdxecSv/projects/algothon-2024' }
+  },
+  'Hardware': {
+    'riscv-processor': { content: 'Wait, this project is yet to be released!', url: '' }
+  },
+  'CyberSecurity': {
+    'siem-elk-stack': { content: 'Wait, this project is yet to be released!', url: '' }
+  }
+};
+
+const commands = {
+  'ls': 'List available blogs and projects',
+  'cat [blog/project]': 'View content of a specific blog or project',
+  'help': 'Show available commands',
+  'clear': 'Clear the terminal',
+  'echo [text]': 'Display text',
+  'pwd': 'Print working directory',
+  'cd [directory]': 'Change directory (blogs or projects)',
+  'open [blog/project]': 'Open a blog or project URL in a new tab',
+  'rename [new_name]': 'Rename the user',
+  'fortune': 'Display a random fortune or quote',
+  'date': 'Display the current date and time',
+  'history': 'Show command history'
+};
+
+const fortunes = [
+  "You will have a great day!",
+  "Good news will come to you by mail. Unless you're a millennial, then it will come by text.",
+  "You will meet someone special today. They will be very good at programming.",
+  "A fresh start will put you on your way. Remember this when you find yourself at a dead end.",
+  "Another internship has just opened up for you - Apply now for peace of mind. Or don't, I'm just a computer program.",
+  "Why did the scarecrow win an award? Because he was outstanding in his field! (You can be too!)",
+  "Why don't skeletons fight each other? Doesn't matter, focus on your studies. You have an exam coming up.",
+  "I told my computer I needed a break, and now it won't stop sending me Kit-Kats.",
+  "Parallel lines have so much in common. It’s a shame they’ll never meet.",
+  "I would tell you a UDP joke, but you might not get it. Also, I don't have time to listen to your response.",
+  "Why do programmers prefer dark mode? Because light attracts bugs!",
+  "You will ace your next exam! If you study.",
+  "Your group project will be better than the last one. I can't promise success but you'll probably try harder knowing how the last one went.",
+  "You will find the perfect study spot today. Your home.",
+  "Your professor will not give you an extension on your assignment. You should have planned this better from the start.",
+  "You will discover a new favorite coffee shop. Your kitchen.",
+  "Your next lecture will be surprisingly interesting. Just like every other lecture, but you will never know since you keep missing them.",
+  "You will make a new friend in your next class. ChatGPT. Or some other AI."
+];
+
+const history = [];
+let historyIndex = -1;
+
+let currentDirectory = '/';
+let username = 'user';
+
+inputElement.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    const command = inputElement.value.trim();
+    handleCommand(command);
+    inputElement.value = '';
+    historyIndex = -1; // Reset history index
+  } else if (event.key === 'ArrowUp') {
+    if (history.length > 0) {
+      historyIndex = (historyIndex + 1) % history.length;
+      inputElement.value = history[history.length - 1 - historyIndex];
+    }
+  } else if (event.key === 'q' && helpOverlay.style.display === 'block') {
+    helpOverlay.style.display = 'none';
+    inputElement.focus();
+  }
+});
+
+function handleCommand(command) {
+  history.push(command);
+  const [cmd, ...args] = command.split(' ');
+
+  switch (cmd) {
+    case 'ls':
+      if (currentDirectory === '/blogs') {
+        outputElement.innerHTML += getPrompt() + command + '<br>' + Object.keys(blogs).join('<br>') + '<br>';
+      } else if (currentDirectory.startsWith('/projects')) {
+        const subDir = currentDirectory.split('/')[2];
+        if (subDir && projects[subDir]) {
+          outputElement.innerHTML += getPrompt() + command + '<br>' + Object.keys(projects[subDir]).join('<br>') + '<br>';
+        } else {
+          outputElement.innerHTML += getPrompt() + command + '<br>' + Object.keys(projects).join('<br>') + '<br>';
+        }
+      } else {
+        outputElement.innerHTML += getPrompt() + command + '<br>' + 'blogs<br>projects<br>';
+      }
+      break;
+    case 'cat':
+      const itemName = args[0];
+      if (currentDirectory.startsWith('/projects')) {
+        const subDir = currentDirectory.split('/')[2];
+        if (subDir && projects[subDir] && projects[subDir][itemName]) {
+          outputElement.innerHTML += getPrompt() + command + '<br>' + projects[subDir][itemName].content + '<br>';
+        } else {
+          outputElement.innerHTML += getPrompt() + command + '<br>' + 'Item not found.<br>';
+        }
+      } else if (currentDirectory === '/blogs' && blogs[itemName]) {
+        outputElement.innerHTML += getPrompt() + command + '<br>' + blogs[itemName].content + '<br>';
+      } else {
+        outputElement.innerHTML += getPrompt() + command + '<br>' + 'Item not found.<br>';
+      }
+      break;
+    case 'help':
+      showHelp();
+      break;
+    case 'clear':
+      outputElement.innerHTML = '';
+      break;
+    case 'echo':
+      const text = args.join(' ');
+      outputElement.innerHTML += getPrompt() + command + '<br>' + text + '<br>';
+      break;
+    case 'pwd':
+      outputElement.innerHTML += getPrompt() + command + '<br>' + currentDirectory + '<br>';
+      break;
+    case 'cd':
+      const directory = args[0];
+      if (directory === '..') {
+        if (currentDirectory !== '/') {
+          currentDirectory = currentDirectory.substring(0, currentDirectory.lastIndexOf('/')) || '/';
+          outputElement.innerHTML += getPrompt() + command + '<br>' + 'Changed directory to ' + currentDirectory + '<br>';
+        } else {
+          outputElement.innerHTML += getPrompt() + command + '<br>' + 'Already at root directory.<br>';
+        }
+      } else if (directory === 'blogs' || directory === 'projects' || projects[directory]) {
+        currentDirectory = '/' + directory;
+        outputElement.innerHTML += getPrompt() + command + '<br>' + 'Changed directory to ' + currentDirectory + '<br>';
+      } else {
+        outputElement.innerHTML += getPrompt() + command + '<br>' + 'Directory not found.<br>';
+      }
+      break;
+    case 'open':
+      const itemToOpen = args[0];
+      if (currentDirectory.startsWith('/projects')) {
+        const subDir = currentDirectory.split('/')[2];
+        if (subDir && projects[subDir] && projects[subDir][itemToOpen]) {
+          const projectUrl = projects[subDir][itemToOpen].url;
+          window.open(projectUrl, '_blank');
+          outputElement.innerHTML += getPrompt() + command + '<br>' + 'Opened ' + projectUrl + ' in a new tab.<br>';
+        } else {
+          outputElement.innerHTML += getPrompt() + command + '<br>' + 'Item not found or cannot be opened.<br>';
+        }
+      } else if (currentDirectory === '/blogs' && blogs[itemToOpen]) {
+        const blogUrl = blogs[itemToOpen].url;
+        window.open(blogUrl, '_blank');
+        outputElement.innerHTML += getPrompt() + command + '<br>' + 'Opened ' + blogUrl + ' in a new tab.<br>';
+      } else {
+        outputElement.innerHTML += getPrompt() + command + '<br>' + 'Item not found or cannot be opened.<br>';
+      }
+      break;
+    case 'rename':
+      const newName = args[0];
+      if (newName) {
+        username = newName;
+        outputElement.innerHTML += getPrompt() + command + '<br>' + 'Username changed to ' + username + '<br>';
+      } else {
+        outputElement.innerHTML += getPrompt() + command + '<br>' + 'Please provide a new username.<br>';
+      }
+      break;
+    case 'fortune':
+      const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+      outputElement.innerHTML += getPrompt() + command + '<br>' + randomFortune + '<br>';
+      break;
+    case 'date':
+      const currentDate = new Date().toLocaleString();
+      outputElement.innerHTML += getPrompt() + command + '<br>' + currentDate + '<br>';
+      break;
+    case 'history':
+      outputElement.innerHTML += getPrompt() + command + '<br>' + history.join('<br>') + '<br>';
+      break;
+    default:
+      outputElement.innerHTML += getPrompt() + command + '<br>' + 'Command not found.<br>';
+  }
+  outputElement.scrollTop = outputElement.scrollHeight;
+  inputElement.focus(); // Ensure the input field is always focused
+}
+
+function showHelp() {
+  helpOverlay.innerHTML = '<h3>Available commands:</h3><br>' + Object.entries(commands).map(([cmd, desc]) => `${cmd} - ${desc}`).join('<br>') + '<br><br><br>Press q to exit.';
+  helpOverlay.style.display = 'block';
+  inputElement.blur();
+}
+
+function getPrompt() {
+  return `${username}@parthak314.github.io:${currentDirectory}$ `;
+}
