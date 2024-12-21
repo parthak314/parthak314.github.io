@@ -177,10 +177,8 @@ function handleCommand(command) {
       const newName = args[0];
       if (newName) {
         username = newName;
-        console.log(`Username changed to: ${username}`);
         outputElement.innerHTML += getPrompt() + command + '<br>' + 'Username changed to ' + username + '<br>';
       } else {
-        console.log('Please provide a new username.');
         outputElement.innerHTML += getPrompt() + command + '<br>' + 'Please provide a new username.<br>';
       }
       break;
@@ -195,8 +193,10 @@ function handleCommand(command) {
     case 'history':
       outputElement.innerHTML += getPrompt() + command + '<br>' + history.join('<br>') + '<br>';
       break;
+    case 'baggu':
+      triggerAwesomeEffect();
+      break;
     default:
-      console.log('Command not found.');
       outputElement.innerHTML += getPrompt() + command + '<br>' + 'Command not found.<br>';
   }
   outputElement.scrollTop = outputElement.scrollHeight;
@@ -251,4 +251,68 @@ function showHelp() {
 
 function getPrompt() {
   return `${username}@parthak314.github.io:${currentDirectory}$ `;
+}
+
+function triggerAwesomeEffect() {
+  // Create a countdown element
+  const countdown = document.createElement('div');
+  countdown.style.position = 'fixed';
+  countdown.style.top = '50%';
+  countdown.style.left = '50%';
+  countdown.style.transform = 'translate(-50%, -50%)';
+  countdown.style.fontSize = '5rem';
+  countdown.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+  countdown.style.color = '#ffffff';
+  countdown.style.zIndex = '1001';
+  document.body.appendChild(countdown);
+
+  let count = 3;
+  countdown.innerHTML = count;
+
+  const countdownInterval = setInterval(() => {
+    count -= 1;
+    if (count > 0) {
+      countdown.innerHTML = count;
+    } else {
+      clearInterval(countdownInterval);
+      document.body.removeChild(countdown);
+
+      document.body.style.backgroundColor = '#ff69b4'; // Hot pink
+      document.body.style.cursor = 'url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj4KICA8dGV4dCB4PSIwIiB5PSIxNSIgZm9udC1zaXplPSIxNSI+8J+NhDwvdGV4dD4KPC9zdmc+), auto'; // 🎉 emoji
+
+      const emoji = document.createElement('div');
+      emoji.innerHTML = '🎉';
+      emoji.style.position = 'fixed';
+      emoji.style.top = '50%';
+      emoji.style.left = '50%';
+      emoji.style.transform = 'translate(-50%, -50%)';
+      emoji.style.fontSize = '5rem';
+      emoji.style.animation = 'spin 2s linear infinite';
+      document.body.appendChild(emoji);
+
+      // Add CSS for animation
+      const style = document.createElement('style');
+      style.innerHTML = `
+        @keyframes spin {
+          0% { transform: translate(-50%, -50%) rotate(0deg); }
+          100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+      `;
+      document.head.appendChild(style);
+
+      // Play a song in the background
+      // const audio = new Audio('path/to/your/song.mp3'); // Replace with the path to your song
+      // audio.play();
+
+      setTimeout(() => {
+        document.body.style.backgroundColor = '';
+        document.body.style.cursor = ''; // Reset cursor
+        document.body.removeChild(emoji);
+        document.head.removeChild(style);
+        // audio.pause();
+        // audio.currentTime = 0;
+      }, 7500);
+    }
+  }, 1000);
+  outputElement.innerHTML += 'Hooray! <br><br>' + 'Happy Birthday Baggu! <br>';
 }
