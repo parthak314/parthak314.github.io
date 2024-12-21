@@ -1,17 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
     const chatbotContainer = document.getElementById('chatbot-container');
     const chatbotToggle = document.getElementById('chatbot-toggle');
+    const chatbotClose = document.getElementById('chatbot-close');
     const chatbotInput = document.getElementById('chatbot-input');
     const chatbotMessages = document.getElementById('chatbot-messages');
 
     chatbotToggle.addEventListener('click', function() {
-        if (chatbotContainer.style.display === 'none' || chatbotContainer.style.display === '') {
-            chatbotContainer.style.display = 'flex';
-            chatbotToggle.style.display = 'none';
-        } else {
-            chatbotContainer.style.display = 'none';
-            chatbotToggle.style.display = 'block';
-        }
+        chatbotContainer.classList.add('show');
+        chatbotToggle.classList.add('hide');
+    });
+
+    chatbotClose.addEventListener('click', function() {
+        chatbotContainer.classList.remove('show');
+        chatbotToggle.classList.remove('hide');
     });
 
     chatbotInput.addEventListener('keydown', function(event) {
