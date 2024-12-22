@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const email = contactForm.querySelector('input[name="email"]').value;
         const message = contactForm.querySelector('textarea[name="message"]').value;
 
-        if (fullname.toLowerCase() === 'baggu20' && email.toLowerCase() === 'guitar.mariokart@birthday.com' && message.toLowerCase() === 'think about it in words') {
+        if (fullname.toLowerCase() === 'baggu20' && email.toLowerCase() === 'guitar.mariokart@birthday.com' && message.toLowerCase() === 'just think about it in words') {
             triggerCelebration();
         }
     });
